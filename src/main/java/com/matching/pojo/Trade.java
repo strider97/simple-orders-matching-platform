@@ -1,4 +1,4 @@
-package com.matching.pojo.request;
+package com.matching.pojo;
 
 import com.matching.pojo.OrderDetails;
 import lombok.Builder;

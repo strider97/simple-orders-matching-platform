@@ -6,7 +6,7 @@ import com.matching.pojo.Asset;
 import com.matching.pojo.Order;
 import com.matching.pojo.OrderDetails;
 import com.matching.pojo.Transaction;
-import com.matching.pojo.request.Trade;
+import com.matching.pojo.Trade;
 import com.matching.queue.TransactionLog;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;

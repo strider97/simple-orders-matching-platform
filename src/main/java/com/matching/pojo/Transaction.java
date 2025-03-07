@@ -1,9 +1,7 @@
 package com.matching.pojo;
 
-import com.matching.pojo.request.Trade;
 import lombok.Builder;
 import lombok.Data;
-import lombok.ToString;
 
 import java.util.List;
 
