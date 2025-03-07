@@ -1,8 +1,10 @@
 import com.matching.constants.AssetType;
+import com.matching.constants.Constants;
 import com.matching.constants.OrderType;
 import com.matching.dao.OrderDao;
 import com.matching.dao.impl.OrderDaoImpl;
 import com.matching.engine.MatchingEngine;
+import com.matching.engine.impl.SkipListOrdersStructure;
 import com.matching.engine.impl.TreeMapOrdersStructure;
 import com.matching.factory.MatchingEngineFactory;
 import com.matching.factory.OrdersQueueFactory;
@@ -45,11 +47,12 @@ public class OrderServiceTests {
   @BeforeEach
   public void setup() {
     MockitoAnnotations.openMocks(this);
+    Constants.NUM_WORKERS = 1;
     orderDao = new OrderDaoImpl();
     when(ordersQueueFactory.getOrderQueue(AssetType.STOCK))
         .thenReturn(new OrderQueue());
     when(matchingEngineFactory.getMatchingEngine(AssetType.STOCK))
-        .thenReturn(new MatchingEngine(new TreeMapOrdersStructure(orderDao), new TransactionLog()));
+        .thenReturn(new MatchingEngine(new SkipListOrdersStructure(orderDao), new TransactionLog()));
     orderService = new OrderService(ordersQueueFactory, matchingEngineFactory, orderDao);
   }
 
