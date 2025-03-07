@@ -2,7 +2,7 @@ package com.matching.constants;
 
 public enum AssetType {
   STOCK,
-  CURRENCY,  // Represents both Monetary and Crypto
+  CURRENCY,
   MONETARY_CURRENCY,
   CRYPTO_CURRENCY
 }

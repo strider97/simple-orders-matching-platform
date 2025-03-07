@@ -17,25 +17,21 @@ public class MainApplication {
     orderService.startWorkers();
 
 
-// Stocks
     Stock appleStock = new Stock("AAPL", "Apple Inc.");
     Stock teslaStock = new Stock("TSLA", "Tesla Inc.");
     Stock googleStock = new Stock("GOOGL", "Alphabet Inc.");
 
-// --- Apple Orders ---
     orderService.placeOrder(new PlaceOrderRequest(appleStock, OrderType.BUY, 10, 150.0));
     orderService.placeOrder(new PlaceOrderRequest(appleStock, OrderType.SELL, 5, 149.0));
     orderService.placeOrder(new PlaceOrderRequest(appleStock, OrderType.SELL, 15, 155.0));
     orderService.placeOrder(new PlaceOrderRequest(appleStock, OrderType.BUY, 13, 155.0));
 
-// --- Tesla Orders ---
     orderService.placeOrder(new PlaceOrderRequest(teslaStock, OrderType.BUY, 5, 700.0));
     orderService.placeOrder(new PlaceOrderRequest(teslaStock, OrderType.SELL, 3, 700.0));
     orderService.placeOrder(new PlaceOrderRequest(teslaStock, OrderType.BUY, 10, 705.0));
     orderService.placeOrder(new PlaceOrderRequest(teslaStock, OrderType.SELL, 5, 705.0));
     orderService.placeOrder(new PlaceOrderRequest(teslaStock, OrderType.SELL, 10, 710.0));
 
-// --- Google Orders ---
     orderService.placeOrder(new PlaceOrderRequest(googleStock, OrderType.BUY, 4, 2800.0));
     TimeUnit.MILLISECONDS.sleep(100);
     orderService.placeOrder(new PlaceOrderRequest(googleStock, OrderType.BUY, 6, 2800.0));

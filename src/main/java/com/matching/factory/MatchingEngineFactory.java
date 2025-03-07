@@ -5,7 +5,9 @@ import com.matching.constants.AssetType;
 import com.matching.engine.MatchingEngine;
 import com.matching.pojo.Asset;
 import com.matching.pojo.Stock;
+import lombok.AllArgsConstructor;
 
+@AllArgsConstructor
 public class MatchingEngineFactory {
   @Inject
   MatchingEngine stockMatchingEngine;
