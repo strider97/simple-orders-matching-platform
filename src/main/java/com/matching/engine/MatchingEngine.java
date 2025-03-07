@@ -1,6 +1,7 @@
 package com.matching.engine;
 
 import com.google.inject.Inject;
+import com.matching.constants.OrderStatus;
 import com.matching.constants.OrderType;
 import com.matching.pojo.Order;
 import com.matching.pojo.OrderDetails;
@@ -43,7 +44,6 @@ public class MatchingEngine  {
 
     while (iterator.hasNext() && order.getQuantity() > 0) {
       Order matchedOrder = iterator.next();
-
       double tradePrice = order.getOrderType() == OrderType.BUY ? matchedOrder.getPrice() : order.getPrice();
       int tradeQuantity = Math.min(order.getQuantity(), matchedOrder.getQuantity());
 

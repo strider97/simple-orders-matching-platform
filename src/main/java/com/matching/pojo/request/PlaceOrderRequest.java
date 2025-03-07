@@ -8,7 +8,7 @@ import lombok.Builder;
 import lombok.Data;
 
 @Data
-@Builder
+@Builder(toBuilder = true)
 public class PlaceOrderRequest extends OrderRequest {
   public PlaceOrderRequest(Asset asset, OrderType orderType, int quantity, double price) {
     super(asset, OrderRequestType.NEW);

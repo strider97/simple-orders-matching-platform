@@ -11,14 +11,16 @@ import lombok.ToString;
 @ToString
 public class Stock extends Asset {
   private final String symbol;
+  private String name;
 
   public Stock(String symbol, String name) {
-    super(AssetType.STOCK, name);
+    super(AssetType.STOCK);
+    this.name = name;
     this.symbol = symbol;
   }
 
   @Override
-  public String getPrintedName() {
-    return symbol + "(" + getName() + ")";
+  public String getName() {
+    return symbol + "(" + name + ")";
   }
 }

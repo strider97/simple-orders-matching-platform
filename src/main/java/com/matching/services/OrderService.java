@@ -25,6 +25,13 @@ public class OrderService {
 
   @Inject
   OrderDao orderDao;
+
+  @Inject
+  public OrderService (OrdersQueueFactory ordersQueueFactory, MatchingEngineFactory matchingEngineFactory, OrderDao orderDao) {
+    this.ordersQueueFactory = ordersQueueFactory;
+    this.matchingEngineFactory = matchingEngineFactory;
+    this.orderDao = orderDao;
+  }
   ExecutorService executorService = Executors.newSingleThreadExecutor();
 
   public String placeOrder(OrderRequest orderRequest) {
@@ -40,6 +47,8 @@ public class OrderService {
 
   public Order getOrderDetails(String requestId) {
     String orderId = orderDao.getOrderIdForRequest(requestId);
+    if(orderId == null)
+      return null;
     return orderDao.getOrder(orderId);
   }
 
@@ -47,6 +56,7 @@ public class OrderService {
     for(int i = 0;i<NUM_WORKERS; i++) {
       executorService.submit(
           new StockWorker(
+              orderDao,
               ordersQueueFactory.getOrderQueue(AssetType.STOCK),
               matchingEngineFactory.getMatchingEngine(AssetType.STOCK))
       );

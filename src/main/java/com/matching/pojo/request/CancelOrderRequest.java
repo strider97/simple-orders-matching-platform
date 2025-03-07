@@ -5,14 +5,17 @@ import com.matching.pojo.Asset;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.Getter;
 
-@Data
-@Builder
-public class CancelOrderRequest<T extends Asset> extends OrderRequest {
+@Getter
+public class CancelOrderRequest extends OrderRequest {
   public String orderId;
-
-  public CancelOrderRequest(String orderId) {
-    super(null, OrderRequestType.CANCEL);
+  private CancelOrderRequest(String orderId, Asset asset) {
+    super(asset, OrderRequestType.CANCEL);
     this.orderId = orderId;
+  }
+
+  public static CancelOrderRequest from(String orderId, Asset asset) {
+    return new CancelOrderRequest(orderId, asset);
   }
 }

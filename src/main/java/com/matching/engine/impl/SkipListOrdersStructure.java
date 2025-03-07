@@ -1,6 +1,7 @@
 package com.matching.engine.impl;
 
 import com.google.inject.Inject;
+import com.matching.constants.OrderStatus;
 import com.matching.constants.OrderType;
 import com.matching.dao.OrderDao;
 import com.matching.engine.OrdersStructure;
@@ -66,7 +67,10 @@ public class SkipListOrdersStructure extends OrdersStructure {
 
         while (!orderQueue.isEmpty() && remainingQuantity > 0) {
           Order topOrder = orderQueue.peek();
-
+          if(OrderStatus.CANCELLED.equals(topOrder.getOrderStatus())) {
+            orderQueue.poll();
+            continue;
+          }
           if ((order.getOrderType() == OrderType.BUY && topOrder.getPrice() > order.getPrice()) ||
               (order.getOrderType() == OrderType.SELL && topOrder.getPrice() < order.getPrice())) {
             return matchedOrders;

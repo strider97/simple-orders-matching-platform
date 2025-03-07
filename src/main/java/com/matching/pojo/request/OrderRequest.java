@@ -14,15 +14,9 @@ public abstract class OrderRequest  {
   protected OrderRequest(Asset asset, OrderRequestType orderRequestType) {
     this.asset = asset;
     this.orderRequestType = orderRequestType;
+    requestId = UUID.randomUUID().toString();
   }
   protected Asset asset;
   protected String requestId;
   protected OrderRequestType orderRequestType;
-
-  public synchronized String getRequestId() {
-    if(requestId == null) {
-      requestId = UUID.randomUUID().toString();
-    }
-    return requestId;
-  }
 }

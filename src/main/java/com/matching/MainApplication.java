@@ -24,9 +24,9 @@ public class MainApplication {
 
 // --- Apple Orders ---
     orderService.placeOrder(new PlaceOrderRequest(appleStock, OrderType.BUY, 10, 150.0));
-    orderService.placeOrder(new PlaceOrderRequest(appleStock, OrderType.SELL, 5, 150.0));
+    orderService.placeOrder(new PlaceOrderRequest(appleStock, OrderType.SELL, 5, 149.0));
     orderService.placeOrder(new PlaceOrderRequest(appleStock, OrderType.SELL, 15, 155.0));
-    orderService.placeOrder(new PlaceOrderRequest(appleStock, OrderType.BUY, 20, 155.0));
+    orderService.placeOrder(new PlaceOrderRequest(appleStock, OrderType.BUY, 13, 155.0));
 
 // --- Tesla Orders ---
     orderService.placeOrder(new PlaceOrderRequest(teslaStock, OrderType.BUY, 5, 700.0));
