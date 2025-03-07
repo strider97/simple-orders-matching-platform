@@ -1,6 +1,7 @@
 import com.matching.constants.AssetType;
 import com.matching.constants.OrderType;
 import com.matching.dao.OrderDao;
+import com.matching.dao.impl.OrderDaoImpl;
 import com.matching.engine.MatchingEngine;
 import com.matching.engine.impl.TreeMapOrdersStructure;
 import com.matching.factory.MatchingEngineFactory;
@@ -32,7 +33,6 @@ public class OrderServiceTests {
   @Mock
   MatchingEngineFactory matchingEngineFactory;
 
-  @Mock
   OrderDao orderDao;
 
   @InjectMocks
@@ -42,6 +42,7 @@ public class OrderServiceTests {
   @BeforeEach
   public void setup() {
     MockitoAnnotations.openMocks(this);
+    orderDao = new OrderDaoImpl();
     when(ordersQueueFactory.getOrderQueue(AssetType.STOCK))
         .thenReturn(new OrderQueue());
     when(matchingEngineFactory.getMatchingEngine(AssetType.STOCK))
@@ -50,9 +51,6 @@ public class OrderServiceTests {
 
   @Test
   void placeOrderTest() throws InterruptedException {
-    doNothing().when(orderDao).addRequestToOrders(any(), any());
-    doNothing().when(orderDao).addOrder(any(), any());
-
     orderService.startWorkers();
     Stock googleStock = new Stock("GOOGL", "Alphabet Inc.");
     orderService.placeOrder(new PlaceOrderRequest(googleStock, OrderType.SELL, 6, 1000.0));

@@ -12,7 +12,6 @@ public abstract class OrdersStructure {
   @Inject
   private OrderDao orderDao;
 
-
   public void addOrder(Order order) {
     try{
       orderDao.addOrder(order.getOrderId(), order);
