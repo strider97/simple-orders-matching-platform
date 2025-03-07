@@ -5,14 +5,14 @@ import com.matching.pojo.Asset;
 import lombok.Getter;
 
 @Getter
-public class ModifyOrderRequest <T extends Asset> extends PlaceOrderRequest<T>  {
-  private ModifyOrderRequest(String orderId, PlaceOrderRequest<T> placeOrderRequest) {
+public class ModifyOrderRequest  extends PlaceOrderRequest  {
+  private ModifyOrderRequest(String orderId, PlaceOrderRequest placeOrderRequest) {
     super(placeOrderRequest.asset, placeOrderRequest.orderType, placeOrderRequest.quantity, placeOrderRequest.price);
     this.orderId = orderId;
   }
 
-  public static <T extends Asset> ModifyOrderRequest<T> from(String orderId, PlaceOrderRequest<T> placeOrderRequest) {
-    return new ModifyOrderRequest<>(orderId, placeOrderRequest);
+  public static  ModifyOrderRequest from(String orderId, PlaceOrderRequest placeOrderRequest) {
+    return new ModifyOrderRequest(orderId, placeOrderRequest);
   }
   String orderId;
 }

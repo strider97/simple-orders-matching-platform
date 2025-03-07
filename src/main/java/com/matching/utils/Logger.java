@@ -36,7 +36,7 @@ public class Logger {
     try (FileWriter fileWriter = new FileWriter(LOG_FILE_PATH, true);
          PrintWriter printWriter = new PrintWriter(fileWriter)) {
       printWriter.println(message);
-//      System.out.println(message);
+      System.out.println(message);
     } catch (IOException e) {
       System.err.println("Failed to write log: " + e.getMessage());
     }

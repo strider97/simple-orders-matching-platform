@@ -17,16 +17,16 @@ import static com.matching.utils.CommonUtils.getCurrentTimeInMS;
 @Data
 @Builder
 @ToString
-public class Order <T extends Asset> {
+public class Order  {
   private String orderId;
-  private T asset;
+  private Asset asset;
   private OrderType orderType;
   private int quantity;
   private double price;
   private long timestamp;
   private OrderStatus orderStatus;
 
-  public static <A extends Asset> Order from(PlaceOrderRequest<A> orderRequest) {
+  public static Order from(PlaceOrderRequest orderRequest) {
     return Order.builder()
         .orderId(UUID.randomUUID().toString())
         .asset(orderRequest.getAsset())

@@ -1,6 +1,8 @@
 package com.matching.engine.impl;
 
+import com.google.inject.Inject;
 import com.matching.constants.OrderType;
+import com.matching.dao.OrderDao;
 import com.matching.engine.OrdersStructure;
 import com.matching.pojo.Asset;
 import com.matching.pojo.Order;
@@ -9,17 +11,22 @@ import java.util.*;
 import java.util.concurrent.ConcurrentSkipListMap;
 import java.util.concurrent.locks.ReentrantLock;
 
-public class SkipListOrdersStructure<T extends Asset> extends OrdersStructure<T> {
-  private final Map<String, ConcurrentSkipListMap<Double, PriorityQueue<Order<T>>>> buyOrders = new HashMap<>();
-  private final Map<String, ConcurrentSkipListMap<Double, PriorityQueue<Order<T>>>> sellOrders = new HashMap<>();
+public class SkipListOrdersStructure extends OrdersStructure {
+  private final Map<String, ConcurrentSkipListMap<Double, PriorityQueue<Order>>> buyOrders = new HashMap<>();
+  private final Map<String, ConcurrentSkipListMap<Double, PriorityQueue<Order>>> sellOrders = new HashMap<>();
   private final ReentrantLock lock = new ReentrantLock();
 
+  @Inject
+  public SkipListOrdersStructure(OrderDao orderDao) {
+    super(orderDao);
+  }
+
   @Override
-  public void addOrder(Order<T> order) {
+  public void addOrder(Order order) {
     lock.lock();
     super.addOrder(order);
     try {
-      Map<String, ConcurrentSkipListMap<Double, PriorityQueue<Order<T>>>> orderBook =
+      Map<String, ConcurrentSkipListMap<Double, PriorityQueue<Order>>> orderBook =
           order.getOrderType() == OrderType.BUY ? buyOrders : sellOrders;
 
       String assetName = order.getAsset().getName();
@@ -39,26 +46,26 @@ public class SkipListOrdersStructure<T extends Asset> extends OrdersStructure<T>
 
 
   @Override
-  public List<Order<T>> match(Order<T> order) {
+  public List<Order> match(Order order) {
     lock.lock();
     try {
-      Map<String, ConcurrentSkipListMap<Double, PriorityQueue<Order<T>>>> orderBook =
+      Map<String, ConcurrentSkipListMap<Double, PriorityQueue<Order>>> orderBook =
           order.getOrderType() == OrderType.BUY ? sellOrders : buyOrders;
 
-      ConcurrentSkipListMap<Double, PriorityQueue<Order<T>>> priceMap = orderBook.get(order.getAsset().getName());
+      ConcurrentSkipListMap<Double, PriorityQueue<Order>> priceMap = orderBook.get(order.getAsset().getName());
       if (priceMap == null) return Collections.emptyList();
 
-      List<Order<T>> matchedOrders = new ArrayList<>();
+      List<Order> matchedOrders = new ArrayList<>();
       int remainingQuantity = order.getQuantity();
 
-      Map.Entry<Double, PriorityQueue<Order<T>>> priceEntry = priceMap.firstEntry();
+      Map.Entry<Double, PriorityQueue<Order>> priceEntry = priceMap.firstEntry();
 
       while (priceEntry != null && remainingQuantity > 0) {
         Double currentPrice = priceEntry.getKey();
-        PriorityQueue<Order<T>> orderQueue = priceEntry.getValue();
+        PriorityQueue<Order> orderQueue = priceEntry.getValue();
 
         while (!orderQueue.isEmpty() && remainingQuantity > 0) {
-          Order<T> topOrder = orderQueue.peek();
+          Order topOrder = orderQueue.peek();
 
           if ((order.getOrderType() == OrderType.BUY && topOrder.getPrice() > order.getPrice()) ||
               (order.getOrderType() == OrderType.SELL && topOrder.getPrice() < order.getPrice())) {
@@ -80,16 +87,16 @@ public class SkipListOrdersStructure<T extends Asset> extends OrdersStructure<T>
 
 
   @Override
-  public void removeOrder(Order<T> order) {
+  public void removeOrder(Order order) {
     lock.lock();
     try {
-      Map<String, ConcurrentSkipListMap<Double, PriorityQueue<Order<T>>>> orderBook =
+      Map<String, ConcurrentSkipListMap<Double, PriorityQueue<Order>>> orderBook =
           order.getOrderType() == OrderType.BUY ? buyOrders : sellOrders;
 
-      ConcurrentSkipListMap<Double, PriorityQueue<Order<T>>> priceMap = orderBook.get(order.getAsset().getName());
+      ConcurrentSkipListMap<Double, PriorityQueue<Order>> priceMap = orderBook.get(order.getAsset().getName());
       if (priceMap == null) return;
 
-      PriorityQueue<Order<T>> orders = priceMap.get(order.getPrice());
+      PriorityQueue<Order> orders = priceMap.get(order.getPrice());
       if (orders != null) {
         orders.remove(order);
         if (orders.isEmpty()) {

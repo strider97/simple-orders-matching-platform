@@ -1,12 +1,15 @@
 import com.matching.constants.AssetType;
 import com.matching.constants.OrderType;
+import com.matching.dao.OrderDao;
 import com.matching.engine.MatchingEngine;
+import com.matching.engine.impl.TreeMapOrdersStructure;
 import com.matching.factory.MatchingEngineFactory;
 import com.matching.factory.OrdersQueueFactory;
 import com.matching.pojo.Stock;
 import com.matching.pojo.Transaction;
 import com.matching.pojo.request.PlaceOrderRequest;
 import com.matching.queue.OrderQueue;
+import com.matching.queue.TransactionLog;
 import com.matching.services.OrderService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -18,6 +21,8 @@ import org.mockito.MockitoAnnotations;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.when;
 
 public class OrderServiceTests {
@@ -27,6 +32,9 @@ public class OrderServiceTests {
   @Mock
   MatchingEngineFactory matchingEngineFactory;
 
+  @Mock
+  OrderDao orderDao;
+
   @InjectMocks
   OrderService orderService;
 
@@ -35,13 +43,16 @@ public class OrderServiceTests {
   public void setup() {
     MockitoAnnotations.openMocks(this);
     when(ordersQueueFactory.getOrderQueue(AssetType.STOCK))
-        .thenReturn(new OrderQueue<>());
+        .thenReturn(new OrderQueue());
     when(matchingEngineFactory.getMatchingEngine(AssetType.STOCK))
-        .thenReturn(new MatchingEngine<>());
+        .thenReturn(new MatchingEngine(new TreeMapOrdersStructure(orderDao), new TransactionLog()));
   }
 
   @Test
   void placeOrderTest() throws InterruptedException {
+    doNothing().when(orderDao).addRequestToOrders(any(), any());
+    doNothing().when(orderDao).addOrder(any(), any());
+
     orderService.startWorkers();
     Stock googleStock = new Stock("GOOGL", "Alphabet Inc.");
     orderService.placeOrder(new PlaceOrderRequest(googleStock, OrderType.SELL, 6, 1000.0));

@@ -10,12 +10,12 @@ import lombok.Data;
 import java.util.UUID;
 
 @Data
-public abstract class OrderRequest <T extends Asset> {
-  protected OrderRequest(T asset, OrderRequestType orderRequestType) {
+public abstract class OrderRequest  {
+  protected OrderRequest(Asset asset, OrderRequestType orderRequestType) {
     this.asset = asset;
     this.orderRequestType = orderRequestType;
   }
-  protected T asset;
+  protected Asset asset;
   protected String requestId;
   protected OrderRequestType orderRequestType;
 

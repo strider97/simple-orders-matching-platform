@@ -10,30 +10,30 @@ import com.matching.pojo.request.OrderRequest;
 import com.matching.pojo.request.PlaceOrderRequest;
 import com.matching.queue.OrderQueue;
 
-public class StockWorker extends Worker<Stock> {
+public class StockWorker extends Worker {
 
-  public StockWorker(OrderQueue<Stock> orderQueue, MatchingEngine<Stock> matchingEngine) {
+  public StockWorker(OrderQueue orderQueue, MatchingEngine matchingEngine) {
     super(orderQueue, matchingEngine);
   }
 
   @Override
   public void run() {
     while(true) {
-      OrderRequest<Stock> stockOrderRequest = orderQueue.takeOrder();
+      OrderRequest stockOrderRequest = orderQueue.takeOrder();
       switch (stockOrderRequest.getOrderRequestType()) {
         case CANCEL:
-          CancelOrderRequest<Stock> cancelOrderRequest = (CancelOrderRequest<Stock>) stockOrderRequest;
+          CancelOrderRequest cancelOrderRequest = (CancelOrderRequest) stockOrderRequest;
           matchingEngine.cancelOrder(cancelOrderRequest.getOrderId());
           break;
         case NEW:
-          PlaceOrderRequest<Stock> placeOrderRequest = (PlaceOrderRequest<Stock>) stockOrderRequest;
-          Order<Stock> stockOrder = Order.from(placeOrderRequest);
+          PlaceOrderRequest placeOrderRequest = (PlaceOrderRequest) stockOrderRequest;
+          Order stockOrder = Order.from(placeOrderRequest);
           matchingEngine.processOrder(stockOrder);
           break;
         case UPDATE:
-          ModifyOrderRequest<Stock> modifyOrderRequest = (ModifyOrderRequest<Stock>) stockOrderRequest;
+          ModifyOrderRequest modifyOrderRequest = (ModifyOrderRequest) stockOrderRequest;
           matchingEngine.cancelOrder(modifyOrderRequest.getOrderId());
-          Order<Stock> newOrder = Order.from(modifyOrderRequest);
+          Order newOrder = Order.from(modifyOrderRequest);
           matchingEngine.processOrder(newOrder);
           break;
       }

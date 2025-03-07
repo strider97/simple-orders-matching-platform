@@ -1,12 +1,11 @@
 package com.matching.engine;
 
+import com.google.inject.Inject;
 import com.matching.constants.OrderType;
-import com.matching.engine.impl.SkipListOrdersStructure;
-import com.matching.pojo.Asset;
 import com.matching.pojo.Order;
 import com.matching.pojo.OrderDetails;
-import com.matching.pojo.Transaction;
 import com.matching.pojo.Trade;
+import com.matching.pojo.Transaction;
 import com.matching.queue.TransactionLog;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
@@ -16,15 +15,15 @@ import java.util.*;
 import static com.matching.utils.CommonUtils.isEmpty;
 
 @AllArgsConstructor
-@NoArgsConstructor
-public class MatchingEngine <T extends Asset> {
-  OrdersStructure<T> ordersStructure = new SkipListOrdersStructure<>();
+public class MatchingEngine  {
+  @Inject
+  private OrdersStructure ordersStructure;
+  @Inject
+  private TransactionLog transactionLog;
 
-  TransactionLog transactionLog = new TransactionLog();
-
-  public synchronized void processOrder(Order<T> order) {
+  public synchronized void processOrder(Order order) {
     ordersStructure.addOrder(order);
-    List<Order<T>> matchedOrders = ordersStructure.match(order);
+    List<Order> matchedOrders = ordersStructure.match(order);
     if(matchedOrders != null && matchedOrders.size() > 0) {
       conductTrade(order, matchedOrders);
     }
@@ -34,16 +33,16 @@ public class MatchingEngine <T extends Asset> {
     ordersStructure.cancelOrder(orderId);
   }
 
-  public void conductTrade(Order<T> order, List<Order<T>> matchedOrders) {
+  public void conductTrade(Order order, List<Order> matchedOrders) {
     if (order == null || matchedOrders == null || matchedOrders.isEmpty()) {
       throw new IllegalArgumentException("Order or matched orders can't be null/empty");
     }
 
-    Iterator<Order<T>> iterator = matchedOrders.iterator();
+    Iterator<Order> iterator = matchedOrders.iterator();
     List<Trade> trades = new ArrayList<>();
 
     while (iterator.hasNext() && order.getQuantity() > 0) {
-      Order<T> matchedOrder = iterator.next();
+      Order matchedOrder = iterator.next();
 
       double tradePrice = order.getOrderType() == OrderType.BUY ? matchedOrder.getPrice() : order.getPrice();
       int tradeQuantity = Math.min(order.getQuantity(), matchedOrder.getQuantity());

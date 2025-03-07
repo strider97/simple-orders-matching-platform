@@ -8,7 +8,7 @@ import lombok.Data;
 
 @Data
 @Builder
-public class CancelOrderRequest<T extends Asset> extends OrderRequest<T> {
+public class CancelOrderRequest<T extends Asset> extends OrderRequest {
   public String orderId;
 
   public CancelOrderRequest(String orderId) {
