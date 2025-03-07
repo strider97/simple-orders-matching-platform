@@ -1,0 +1,89 @@
+Transaction ID: d2b9a41e-bdf3-43b3-aa93-5b926c4528dd
+  - Trade ID: 2582df21-8a2c-4a38-8d39-c7c4c5e455f7
+    - Trade Price: 1000.0
+    - Trade Quantity: 5
+    - Buy Order:
+      - Order ID: b8bbea0b-a908-493c-ae48-b17b0e3091b3
+      - Type: BUY
+      - Asset: Stock(symbol=GOOGL)
+      - Quantity Traded: 5
+      - Order Price: 1001.0
+    - Sell Order:
+      - Order ID: 312ea382-ae0a-4269-9eae-9f6e4b379396
+      - Type: SELL
+      - Asset: Stock(symbol=GOOGL)
+      - Quantity Traded: 5
+      - Order Price: 1000.0
+
+  - Timestamp: 1741337021636
+
+Transaction ID: f2eb14e8-8574-4076-a581-786e69a05d70
+  - Trade ID: 39bbfe09-5f32-4793-8b30-ab8e7a86fdfd
+    - Trade Price: 1000.0
+    - Trade Quantity: 1
+    - Buy Order:
+      - Order ID: 032a0a6e-4e94-43b5-a65e-58bfff375751
+      - Type: BUY
+      - Asset: Stock(symbol=GOOGL)
+      - Quantity Traded: 1
+      - Order Price: 1003.0
+    - Sell Order:
+      - Order ID: 312ea382-ae0a-4269-9eae-9f6e4b379396
+      - Type: SELL
+      - Asset: Stock(symbol=GOOGL)
+      - Quantity Traded: 1
+      - Order Price: 1000.0
+
+  - Trade ID: 3a23d9f9-ffe9-4e12-b3e6-93473025d725
+    - Trade Price: 1002.0
+    - Trade Quantity: 1
+    - Buy Order:
+      - Order ID: 032a0a6e-4e94-43b5-a65e-58bfff375751
+      - Type: BUY
+      - Asset: Stock(symbol=GOOGL)
+      - Quantity Traded: 1
+      - Order Price: 1003.0
+    - Sell Order:
+      - Order ID: 71a1ad9f-7c40-4cf8-a384-a5225730a99c
+      - Type: SELL
+      - Asset: Stock(symbol=GOOGL)
+      - Quantity Traded: 1
+      - Order Price: 1002.0
+
+  - Timestamp: 1741337021771
+
+Transaction ID: 2d9bfd50-1d24-4ac9-8305-0041d821df7e
+  - Trade ID: 3acefe35-221f-494c-a141-8d3d46cf20b9
+    - Trade Price: 999.0
+    - Trade Quantity: 7
+    - Buy Order:
+      - Order ID: e3a01a14-8552-4839-939c-5e6120ef1143
+      - Type: BUY
+      - Asset: Stock(symbol=GOOGL)
+      - Quantity Traded: 7
+      - Order Price: 1002.0
+    - Sell Order:
+      - Order ID: c911fb78-9166-4bad-a549-dd1b1cd15aa3
+      - Type: SELL
+      - Asset: Stock(symbol=GOOGL)
+      - Quantity Traded: 7
+      - Order Price: 999.0
+
+  - Trade ID: d56fe286-2827-4f82-96cb-4444d898e11b
+    - Trade Price: 1002.0
+    - Trade Quantity: 3
+    - Buy Order:
+      - Order ID: e3a01a14-8552-4839-939c-5e6120ef1143
+      - Type: BUY
+      - Asset: Stock(symbol=GOOGL)
+      - Quantity Traded: 3
+      - Order Price: 1002.0
+    - Sell Order:
+      - Order ID: 71a1ad9f-7c40-4cf8-a384-a5225730a99c
+      - Type: SELL
+      - Asset: Stock(symbol=GOOGL)
+      - Quantity Traded: 3
+      - Order Price: 1002.0
+
+  - Timestamp: 1741337021921
+

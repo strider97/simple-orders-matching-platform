@@ -1,0 +1,93 @@
+package com.matching.engine;
+
+import com.google.inject.Inject;
+import com.matching.constants.OrderType;
+import com.matching.engine.impl.SkipListOrdersStructure;
+import com.matching.engine.impl.TreeMapOrdersStructure;
+import com.matching.pojo.Asset;
+import com.matching.pojo.Order;
+import com.matching.pojo.OrderDetails;
+import com.matching.pojo.Transaction;
+import com.matching.pojo.request.Trade;
+import com.matching.queue.TransactionLog;
+import com.matching.utils.Logger;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
+
+import java.util.*;
+
+import static com.matching.utils.CommonUtils.isEmpty;
+
+@AllArgsConstructor
+@NoArgsConstructor
+public class MatchingEngine <T extends Asset> {
+  OrdersStructure<T> ordersStructure = new TreeMapOrdersStructure<>();
+
+  TransactionLog transactionLog = new TransactionLog();
+
+  public synchronized void processOrder(Order<T> order) {
+    ordersStructure.addOrder(order);
+    List<Order<T>> matchedOrders = ordersStructure.match(order);
+    if(matchedOrders != null && matchedOrders.size() > 0) {
+      conductTrade(order, matchedOrders);
+    }
+  }
+
+  public void conductTrade(Order<T> order, List<Order<T>> matchedOrders) {
+    if (order == null || matchedOrders == null || matchedOrders.isEmpty()) {
+      throw new IllegalArgumentException("Order or matched orders can't be null/empty");
+    }
+
+    Iterator<Order<T>> iterator = matchedOrders.iterator();
+    List<Trade> trades = new ArrayList<>();
+
+    while (iterator.hasNext() && order.getQuantity() > 0) {
+      Order<T> matchedOrder = iterator.next();
+
+      // Trade price depends on each matched order's price
+      double tradePrice = order.getOrderType() == OrderType.BUY ? matchedOrder.getPrice() : order.getPrice();
+      int tradeQuantity = Math.min(order.getQuantity(), matchedOrder.getQuantity());
+
+      // Deduct traded quantity from both orders
+      order.setQuantity(order.getQuantity() - tradeQuantity);
+      matchedOrder.setQuantity(matchedOrder.getQuantity() - tradeQuantity);
+      trades.add(createTrade(order, matchedOrder, tradeQuantity, tradePrice));
+
+
+      // if order is partially full, then add it back to the queue.
+      if (!isEmpty(matchedOrder)) {
+        ordersStructure.addOrder(matchedOrder);
+      }
+    }
+
+    if (isEmpty(order)) {
+      ordersStructure.removeOrder(order);
+    }
+    // Finally log transaction
+    transactionLog.commitToLog(createTransaction(trades));
+  }
+
+  private Trade createTrade(Order order, Order matchedOrder, int tradeQuantity, double tradePrice) {
+    Order buyOrder = OrderType.BUY.equals(order.getOrderType()) ? order : matchedOrder;
+    Order sellOrder = OrderType.SELL.equals(order.getOrderType()) ? order : matchedOrder;
+    return Trade.builder()
+        .tradeId(UUID.randomUUID().toString())
+        .tradePrice(tradePrice)
+        .tradeQuantity(tradeQuantity)
+        .buyOrderDetails(OrderDetails.from(buyOrder, tradeQuantity))
+        .sellOrderDetails(OrderDetails.from(sellOrder, tradeQuantity))
+        .build();
+  }
+
+  private Transaction createTransaction(List<Trade> trades) {
+    return Transaction.builder()
+        .transactionId(UUID.randomUUID().toString())
+        .trades(trades)
+        .timestamp(new Date().getTime())
+        .build();
+  }
+
+  public List<Transaction> getTransactionDoneByEngine() {
+    return transactionLog.getTransactions();
+  }
+}
