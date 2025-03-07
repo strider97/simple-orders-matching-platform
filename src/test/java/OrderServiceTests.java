@@ -44,28 +44,28 @@ public class OrderServiceTests {
   void placeOrderTest() throws InterruptedException {
     orderService.startWorkers();
     Stock googleStock = new Stock("GOOGL", "Alphabet Inc.");
-    orderService.placeOrder(new PlaceOrderRequest(googleStock, OrderType.SELL, 6, 1000.0)); // Sell 6 @ $1000
+    orderService.placeOrder(new PlaceOrderRequest(googleStock, OrderType.SELL, 6, 1000.0));
     TimeUnit.MILLISECONDS.sleep(100);
 
-    orderService.placeOrder(new PlaceOrderRequest(googleStock, OrderType.SELL, 4, 1002.0)); // Sell 4 @ $1002 (higher price, lower priority)
+    orderService.placeOrder(new PlaceOrderRequest(googleStock, OrderType.SELL, 4, 1002.0));
     TimeUnit.MILLISECONDS.sleep(100);
 
-    orderService.placeOrder(new PlaceOrderRequest(googleStock, OrderType.BUY, 5, 1001.0)); // Buy 5 @ $1001 (partially matches $1000)
+    orderService.placeOrder(new PlaceOrderRequest(googleStock, OrderType.BUY, 5, 1001.0));
     TimeUnit.MILLISECONDS.sleep(100);
 
-    orderService.placeOrder(new PlaceOrderRequest(googleStock, OrderType.BUY, 2, 1003.0)); // Buy 2 @ $1003 (should match $1002 first)
+    orderService.placeOrder(new PlaceOrderRequest(googleStock, OrderType.BUY, 2, 1003.0));
     TimeUnit.MILLISECONDS.sleep(100);
 
-    orderService.placeOrder(new PlaceOrderRequest(googleStock, OrderType.SELL, 7, 999.0)); // Sell 7 @ $2799 (best price, highest priority)
+    orderService.placeOrder(new PlaceOrderRequest(googleStock, OrderType.SELL, 7, 999.0));
     TimeUnit.MILLISECONDS.sleep(100);
 
-    orderService.placeOrder(new PlaceOrderRequest(googleStock, OrderType.BUY, 10, 1002.0)); // Buy 10 @ $1002 (should match $2799, $1000, then $1002)
+    orderService.placeOrder(new PlaceOrderRequest(googleStock, OrderType.BUY, 10, 1002.0));
     TimeUnit.MILLISECONDS.sleep(100);
 
-    orderService.placeOrder(new PlaceOrderRequest(googleStock, OrderType.SELL, 3, 1001.0)); // Sell 3 @ $1001 (should match existing Buy orders)
+    orderService.placeOrder(new PlaceOrderRequest(googleStock, OrderType.SELL, 3, 1001.0));
     TimeUnit.MILLISECONDS.sleep(100);
 
-    orderService.placeOrder(new PlaceOrderRequest(googleStock, OrderType.BUY, 4, 1000.0)); // Buy 4 @ $1000 (may not get executed if no sellers left)
+    orderService.placeOrder(new PlaceOrderRequest(googleStock, OrderType.BUY, 4, 1000.0));
     TimeUnit.MILLISECONDS.sleep(100);
 
     TimeUnit.MILLISECONDS.sleep(1000);

@@ -38,7 +38,7 @@ public class TreeMapOrdersStructure<T extends Asset> extends OrdersStructure<T> 
 
 
   @Override
-  public List<Order<T>> match(Order<T> order) {
+  public List<Order<T>> match(Order order) {
     lock.lock();
     try {
       Map<String, TreeMap<Double, PriorityQueue<Order<T>>>> orderBook =

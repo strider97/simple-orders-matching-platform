@@ -7,9 +7,22 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 
+import java.util.UUID;
+
 @Data
-@AllArgsConstructor
 public abstract class OrderRequest <T extends Asset> {
+  protected OrderRequest(T asset, OrderRequestType orderRequestType) {
+    this.asset = asset;
+    this.orderRequestType = orderRequestType;
+  }
   protected T asset;
+  protected String requestId;
   protected OrderRequestType orderRequestType;
+
+  public synchronized String getRequestId() {
+    if(requestId == null) {
+      requestId = UUID.randomUUID().toString();
+    }
+    return requestId;
+  }
 }
