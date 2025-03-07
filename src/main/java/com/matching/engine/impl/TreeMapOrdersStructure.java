@@ -20,7 +20,7 @@ public class TreeMapOrdersStructure<T extends Asset> extends OrdersStructure<T> 
       Map<String, TreeMap<Double, PriorityQueue<Order<T>>>> orderBook =
           order.getOrderType() == OrderType.BUY ? buyOrders : sellOrders;
 
-      String assetName = order.getAsset().getName(); // Group by asset name
+      String assetName = order.getAsset().getName();
 
       Comparator<Double> priceComparator = order.getOrderType() == OrderType.BUY
           ? Comparator.reverseOrder()

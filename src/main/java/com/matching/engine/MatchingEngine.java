@@ -1,16 +1,13 @@
 package com.matching.engine;
 
-import com.google.inject.Inject;
 import com.matching.constants.OrderType;
 import com.matching.engine.impl.SkipListOrdersStructure;
-import com.matching.engine.impl.TreeMapOrdersStructure;
 import com.matching.pojo.Asset;
 import com.matching.pojo.Order;
 import com.matching.pojo.OrderDetails;
 import com.matching.pojo.Transaction;
 import com.matching.pojo.request.Trade;
 import com.matching.queue.TransactionLog;
-import com.matching.utils.Logger;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 
@@ -44,17 +41,13 @@ public class MatchingEngine <T extends Asset> {
     while (iterator.hasNext() && order.getQuantity() > 0) {
       Order<T> matchedOrder = iterator.next();
 
-      // Trade price depends on each matched order's price
       double tradePrice = order.getOrderType() == OrderType.BUY ? matchedOrder.getPrice() : order.getPrice();
       int tradeQuantity = Math.min(order.getQuantity(), matchedOrder.getQuantity());
 
-      // Deduct traded quantity from both orders
       order.setQuantity(order.getQuantity() - tradeQuantity);
       matchedOrder.setQuantity(matchedOrder.getQuantity() - tradeQuantity);
       trades.add(createTrade(order, matchedOrder, tradeQuantity, tradePrice));
 
-
-      // if order is partially full, then add it back to the queue.
       if (!isEmpty(matchedOrder)) {
         ordersStructure.addOrder(matchedOrder);
       }
@@ -63,7 +56,6 @@ public class MatchingEngine <T extends Asset> {
     if (isEmpty(order)) {
       ordersStructure.removeOrder(order);
     }
-    // Finally log transaction
     transactionLog.commitToLog(createTransaction(trades));
   }
 
