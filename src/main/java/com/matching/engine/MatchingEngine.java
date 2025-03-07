@@ -30,6 +30,10 @@ public class MatchingEngine <T extends Asset> {
     }
   }
 
+  public void cancelOrder(String orderId) {
+    ordersStructure.cancelOrder(orderId);
+  }
+
   public void conductTrade(Order<T> order, List<Order<T>> matchedOrders) {
     if (order == null || matchedOrders == null || matchedOrders.isEmpty()) {
       throw new IllegalArgumentException("Order or matched orders can't be null/empty");

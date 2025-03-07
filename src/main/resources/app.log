@@ -1,222 +1,89 @@
-Transaction ID: 44934c5c-80ed-4078-8de8-bc4564841366
-  - Trade ID: 54817064-2faf-4794-ae7a-cb70a49884f0
-    - Trade Price: 150.0
+Transaction ID: 71d7a72c-b42f-4376-bc24-7995531c98d2
+  - Trade ID: cbd6e182-aa30-414b-8b27-1860bd8cc667
+    - Trade Price: 1000.0
     - Trade Quantity: 5
     - Buy Order:
-      - Order ID: 8d3b5207-93f9-475f-9de6-048872839525
-      - Type: BUY
-      - Asset: Stock(symbol=AAPL)
-      - Quantity Traded: 5
-      - Order Price: 150.0
-    - Sell Order:
-      - Order ID: aa5b3b32-306f-48d7-b200-0893ff14ccdc
-      - Type: SELL
-      - Asset: Stock(symbol=AAPL)
-      - Quantity Traded: 5
-      - Order Price: 150.0
-
-  - Timestamp: 1741338104124
-
-Transaction ID: 479dfda2-56b2-4ca1-ba12-ee8278999fba
-  - Trade ID: 6e163873-fddb-4358-9131-7eb0752f23e6
-    - Trade Price: 155.0
-    - Trade Quantity: 15
-    - Buy Order:
-      - Order ID: d3d27b9f-9024-4b24-b131-f076787aa0a6
-      - Type: BUY
-      - Asset: Stock(symbol=AAPL)
-      - Quantity Traded: 15
-      - Order Price: 155.0
-    - Sell Order:
-      - Order ID: f08a6df1-77e2-40d2-b5d9-2f2561b5a737
-      - Type: SELL
-      - Asset: Stock(symbol=AAPL)
-      - Quantity Traded: 15
-      - Order Price: 155.0
-
-  - Timestamp: 1741338104288
-
-Transaction ID: 7dc5c2be-2bae-4d93-820e-ba22d5e422d5
-  - Trade ID: 854e77cb-dff5-41cc-9b11-ddb48c84c57e
-    - Trade Price: 700.0
-    - Trade Quantity: 3
-    - Buy Order:
-      - Order ID: 84386dc4-0173-4259-8953-67ad19578de3
-      - Type: BUY
-      - Asset: Stock(symbol=TSLA)
-      - Quantity Traded: 3
-      - Order Price: 700.0
-    - Sell Order:
-      - Order ID: 2cb752e3-c2e0-4b6e-a89b-1d103aad985b
-      - Type: SELL
-      - Asset: Stock(symbol=TSLA)
-      - Quantity Traded: 3
-      - Order Price: 700.0
-
-  - Timestamp: 1741338104369
-
-Transaction ID: 25492d87-85c8-4538-a75b-85985307a69b
-  - Trade ID: 8b231c7b-9161-42c6-8aa4-31ed9af09b6e
-    - Trade Price: 705.0
-    - Trade Quantity: 5
-    - Buy Order:
-      - Order ID: 8f0b99e3-4134-41d4-8f94-9cb8b3adefec
-      - Type: BUY
-      - Asset: Stock(symbol=TSLA)
-      - Quantity Traded: 5
-      - Order Price: 705.0
-    - Sell Order:
-      - Order ID: dc737b41-0e41-49db-a7f6-2a8ace297d6c
-      - Type: SELL
-      - Asset: Stock(symbol=TSLA)
-      - Quantity Traded: 5
-      - Order Price: 705.0
-
-  - Timestamp: 1741338104370
-
-Transaction ID: 152947ff-39ae-4704-a012-1c0471f98acf
-  - Trade ID: 3e3440e1-8903-4a20-8be1-761111511a71
-    - Trade Price: 2799.0
-    - Trade Quantity: 4
-    - Buy Order:
-      - Order ID: 3adc98ea-9a3b-4d69-8766-84d640b30303
+      - Order ID: 17d2b896-28b3-4cbd-a94a-06b5b944a204
       - Type: BUY
       - Asset: Stock(symbol=GOOGL)
-      - Quantity Traded: 4
-      - Order Price: 2800.0
+      - Quantity Traded: 5
+      - Order Price: 1001.0
     - Sell Order:
-      - Order ID: c69afff3-bc17-444f-93f9-4044b68815b1
+      - Order ID: 6617b3bb-87cf-46db-b06c-7741e3adf8b5
       - Type: SELL
       - Asset: Stock(symbol=GOOGL)
-      - Quantity Traded: 4
-      - Order Price: 2799.0
+      - Quantity Traded: 5
+      - Order Price: 1000.0
 
-  - Trade ID: a3611692-c764-4dd7-a976-221afeed9e2c
-    - Trade Price: 2799.0
+  - Timestamp: 1741345644759
+
+Transaction ID: 19e37472-60fe-4005-afec-70949380c883
+  - Trade ID: bee9c1f7-f70b-4086-ab7a-2500f11e5290
+    - Trade Price: 1000.0
     - Trade Quantity: 1
     - Buy Order:
-      - Order ID: bc830cbb-4691-4c7e-adc3-913ac319d593
+      - Order ID: 09e94d60-87a3-4c7f-b729-9c9295e757f7
       - Type: BUY
       - Asset: Stock(symbol=GOOGL)
       - Quantity Traded: 1
-      - Order Price: 2800.0
+      - Order Price: 1003.0
     - Sell Order:
-      - Order ID: c69afff3-bc17-444f-93f9-4044b68815b1
+      - Order ID: 6617b3bb-87cf-46db-b06c-7741e3adf8b5
       - Type: SELL
       - Asset: Stock(symbol=GOOGL)
       - Quantity Traded: 1
-      - Order Price: 2799.0
+      - Order Price: 1000.0
 
-  - Timestamp: 1741338104377
-
-Transaction ID: efaacaca-7605-404a-9fd6-a117ea0a49ac
-  - Trade ID: cba50de7-723d-4930-b719-6b7bda500b30
-    - Trade Price: 2798.0
-    - Trade Quantity: 5
+  - Trade ID: 729842d8-d846-474b-aa47-1c294f5d0e7f
+    - Trade Price: 1002.0
+    - Trade Quantity: 1
     - Buy Order:
-      - Order ID: bc830cbb-4691-4c7e-adc3-913ac319d593
+      - Order ID: 09e94d60-87a3-4c7f-b729-9c9295e757f7
       - Type: BUY
       - Asset: Stock(symbol=GOOGL)
-      - Quantity Traded: 5
-      - Order Price: 2800.0
+      - Quantity Traded: 1
+      - Order Price: 1003.0
     - Sell Order:
-      - Order ID: 52929de8-9a38-4afc-acee-8d2dca7c382f
+      - Order ID: b0d313d3-73c7-45d6-935d-8d3c0306b147
       - Type: SELL
       - Asset: Stock(symbol=GOOGL)
-      - Quantity Traded: 5
-      - Order Price: 2798.0
+      - Quantity Traded: 1
+      - Order Price: 1002.0
 
-  - Timestamp: 1741338104405
+  - Timestamp: 1741345644866
 
-Transaction ID: 62dd6496-d021-4af1-9bc6-b17ade7d9648
-  - Trade ID: 78e006c2-260a-4516-985e-7c112db539c6
-    - Trade Price: 2798.0
-    - Trade Quantity: 5
-    - Buy Order:
-      - Order ID: 1a370ddf-d0d4-4826-8f02-938f072f857d
-      - Type: BUY
-      - Asset: Stock(symbol=GOOGL)
-      - Quantity Traded: 5
-      - Order Price: 2801.0
-    - Sell Order:
-      - Order ID: 52929de8-9a38-4afc-acee-8d2dca7c382f
-      - Type: SELL
-      - Asset: Stock(symbol=GOOGL)
-      - Quantity Traded: 5
-      - Order Price: 2798.0
-
-  - Timestamp: 1741338104721
-
-Transaction ID: 72787d61-3125-47a4-879c-9b9e9e38908a
-  - Trade ID: 2da6c9bf-37b5-4f85-95c9-c555269507ea
-    - Trade Price: 2800.0
-    - Trade Quantity: 2
-    - Buy Order:
-      - Order ID: f70b8539-d9b4-4471-aa33-b69ab5721263
-      - Type: BUY
-      - Asset: Stock(symbol=GOOGL)
-      - Quantity Traded: 2
-      - Order Price: 2803.0
-    - Sell Order:
-      - Order ID: d330bbc3-e34a-4e62-94c1-ffbb5b8b6a59
-      - Type: SELL
-      - Asset: Stock(symbol=GOOGL)
-      - Quantity Traded: 2
-      - Order Price: 2800.0
-
-  - Timestamp: 1741338104826
-
-Transaction ID: d0fe7725-1b79-49a5-a0c1-d3ecf1d36fe6
-  - Trade ID: 448e1219-d891-447e-b085-313db52ded0c
-    - Trade Price: 2799.0
+Transaction ID: e7f72502-2bde-42f5-88f0-54d35457da04
+  - Trade ID: 47bb62a8-138e-4cf5-af86-35798e0f57ed
+    - Trade Price: 999.0
     - Trade Quantity: 7
     - Buy Order:
-      - Order ID: c5c05ede-1365-4f48-b817-588b22695b60
+      - Order ID: b5f93d46-7bd5-46d1-aa2a-90495998ce74
       - Type: BUY
       - Asset: Stock(symbol=GOOGL)
       - Quantity Traded: 7
-      - Order Price: 2802.0
+      - Order Price: 1002.0
     - Sell Order:
-      - Order ID: 369ba0a8-8245-4d57-aeb5-8101d5ad9580
+      - Order ID: e604a073-8ffa-4ee7-827b-1a3f523d2aa1
       - Type: SELL
       - Asset: Stock(symbol=GOOGL)
       - Quantity Traded: 7
-      - Order Price: 2799.0
+      - Order Price: 999.0
 
-  - Trade ID: 2f94c921-f855-4be7-acd4-695458d6b1f2
-    - Trade Price: 2800.0
+  - Trade ID: 3c3ca2a7-8446-4768-9a61-36652245d4c7
+    - Trade Price: 1002.0
     - Trade Quantity: 3
     - Buy Order:
-      - Order ID: c5c05ede-1365-4f48-b817-588b22695b60
+      - Order ID: b5f93d46-7bd5-46d1-aa2a-90495998ce74
       - Type: BUY
       - Asset: Stock(symbol=GOOGL)
       - Quantity Traded: 3
-      - Order Price: 2802.0
+      - Order Price: 1002.0
     - Sell Order:
-      - Order ID: d330bbc3-e34a-4e62-94c1-ffbb5b8b6a59
+      - Order ID: b0d313d3-73c7-45d6-935d-8d3c0306b147
       - Type: SELL
       - Asset: Stock(symbol=GOOGL)
       - Quantity Traded: 3
-      - Order Price: 2800.0
+      - Order Price: 1002.0
 
-  - Timestamp: 1741338105036
-
-Transaction ID: a84ebbe1-acd6-4bef-a428-c4748d415b90
-  - Trade ID: 25224907-0c24-4a42-95cd-63ad718e8d7d
-    - Trade Price: 2800.0
-    - Trade Quantity: 1
-    - Buy Order:
-      - Order ID: 4892bd4c-335c-4940-8371-bbd5eabb3613
-      - Type: BUY
-      - Asset: Stock(symbol=GOOGL)
-      - Quantity Traded: 1
-      - Order Price: 2800.0
-    - Sell Order:
-      - Order ID: d330bbc3-e34a-4e62-94c1-ffbb5b8b6a59
-      - Type: SELL
-      - Asset: Stock(symbol=GOOGL)
-      - Quantity Traded: 1
-      - Order Price: 2800.0
-
-  - Timestamp: 1741338105238
+  - Timestamp: 1741345645035
 

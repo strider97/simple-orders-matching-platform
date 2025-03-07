@@ -7,7 +7,6 @@ import com.matching.factory.OrdersQueueFactory;
 import com.matching.pojo.Order;
 import com.matching.pojo.Transaction;
 import com.matching.pojo.request.OrderRequest;
-import com.matching.queue.TransactionLog;
 import com.matching.workers.StockWorker;
 
 import java.util.List;
@@ -28,13 +27,12 @@ public class OrderService {
 
   public void placeOrder(OrderRequest orderRequest) {
     ordersQueueFactory.getOrderQueue(orderRequest.getAsset().getAssetType())
-        .addOrder(buildOrder(
-            orderRequest
-        ));
+        .addOrderRequest(orderRequest);
   }
 
-  public void modifyOrder(OrderRequest orderRequest) {
-
+  public void modifyOrder(OrderRequest newOrderRequest, String oldOrderId) {
+    cancelOrder(oldOrderId);
+    placeOrder(newOrderRequest);
   }
 
   public void cancelOrder(String orderId) {
@@ -44,17 +42,6 @@ public class OrderService {
   public List<Transaction> getAllTransactions(AssetType assetType) {
     return matchingEngineFactory.getMatchingEngine(assetType)
         .getTransactionDoneByEngine();
-  }
-
-  private Order buildOrder(OrderRequest orderRequest) {
-    return Order.builder()
-        .orderId(UUID.randomUUID().toString())
-        .asset(orderRequest.getAsset())
-        .orderType(orderRequest.getOrderType())
-        .quantity(orderRequest.getQuantity())
-        .price(orderRequest.getPrice())
-        .timestamp(getCurrentTimeInMS())
-        .build();
   }
 
   public void startWorkers() {

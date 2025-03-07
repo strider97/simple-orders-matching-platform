@@ -17,6 +17,7 @@ public class SkipListOrdersStructure<T extends Asset> extends OrdersStructure<T>
   @Override
   public void addOrder(Order<T> order) {
     lock.lock();
+    super.addOrder(order);
     try {
       Map<String, ConcurrentSkipListMap<Double, PriorityQueue<Order<T>>>> orderBook =
           order.getOrderType() == OrderType.BUY ? buyOrders : sellOrders;
