@@ -21,7 +21,7 @@ import static com.matching.utils.CommonUtils.isEmpty;
 @AllArgsConstructor
 @NoArgsConstructor
 public class MatchingEngine <T extends Asset> {
-  OrdersStructure<T> ordersStructure = new TreeMapOrdersStructure<>();
+  OrdersStructure<T> ordersStructure = new SkipListOrdersStructure<>();
 
   TransactionLog transactionLog = new TransactionLog();
 
